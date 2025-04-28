@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 
@@ -11,11 +11,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  // Створення інформації користувача
-  @Post('create')
-  async create(@Body() data:any) {
-   return this.appService.save(data)
+  @Get('get-info/:name')
+  async getInfo(@Param('name') name: string) {
+    const exists = await this.appService.getInfo(name);
+    return { exists }
   }
 
+  @Post(':sendInfo')
+  async sendInfo(@Body() data:any, @Param('filmId') name: string) {
+   return this.appService.sendInfo(data, name)
+  }
   
 }

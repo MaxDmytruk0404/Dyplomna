@@ -10,13 +10,45 @@ export class AppService {
     return 'Hello World!';
   }
 
-  // Збереження інформації коли користувач зареєструвався
-  async save(dto: any) {
-    console.log(dto)
-    return this.databaseService.post.create({
-      data: {
-        data: dto,
+  // отримання інформації з бази днаих
+  async getInfo(name: string): Promise<any> {
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        data: {
+          path: '$.name',
+          equals: name,
+        },
       },
+    });
+
+
+    return user?.data ?? null;
+  }
+
+  // Додавання інформаціх до БД
+  async sendInfo(data: any, name: string): Promise<any> {
+
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        data: {
+          path: '$.name',
+          equals: name, 
+        },
+      },
+    });
+  
+    if (!user) {
+      throw new Error('User not found');
+    }
+  
+    return this.databaseService.post.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        data: data
+      }
+
     });
   }
 }
