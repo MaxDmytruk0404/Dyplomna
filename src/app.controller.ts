@@ -17,7 +17,7 @@ export class AppController {
     return { exists }
   }
 
-  @Post(':sendInfo/name')
+  @Post('sendInfo/:name')
   async sendInfo(@Body() data:any, @Param('name') name: string) {
    return this.appService.sendInfo(data, name)
   }
