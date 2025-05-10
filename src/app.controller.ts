@@ -14,11 +14,10 @@ export class AppController {
   @Get('check-credentials')
   async checkCredentials(
     @Query('name') name: string,
+    @Query('password') password: string,
     @Query('type') type: string,
-  ) {
-    const exists = this.appService.checkCredentials(name, type);
-    return { exists }
+  ): Promise<boolean> {
+    return this.appService.checkCredentials(name, password, type);
   }
-
   
 }
