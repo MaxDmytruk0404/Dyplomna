@@ -11,15 +11,14 @@ export class AppService {
   }
 
   // Перевірки чи є користувач в БД
-  async checkCredentials(name: string, password: string, type: string): Promise<boolean> {
+  async checkCredentials(name: string, type: string) {
     const user = await this.databaseService.post.findFirst({
       where: {
         name: name,
-        password: password,
         type: type,
       },
     });
-    return !!user; // Повертає true, якщо користувач знайдений
+    return user?.data || undefined// Повертає true, якщо користувач знайдений
   }
 
   
