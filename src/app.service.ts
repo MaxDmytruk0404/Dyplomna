@@ -10,45 +10,17 @@ export class AppService {
     return 'Hello World!';
   }
 
-  // отримання інформації з бази днаих
-  async getInfo(name: string): Promise<any> {
+  // Перевірки чи є користувач в БД
+  async checkCredentials(name: string, password: string, type: string): Promise<boolean> {
     const user = await this.databaseService.post.findFirst({
       where: {
-        data: {
-          path: '$.name',
-          equals: name,
-        },
+        name: name,
+        password: password,
+        type: type,
       },
     });
-
-
-    return user?.data ?? null;
+    return !!user; // Повертає true, якщо користувач знайдений
   }
 
-  // Додавання інформаціх до БД
-  async sendInfo(data: any, name: string): Promise<any> {
-
-    const user = await this.databaseService.post.findFirst({
-      where: {
-        data: {
-          path: '$.name',
-          equals: name, 
-        },
-      },
-    });
   
-    if (!user) {
-      throw new Error('User not found');
-    }
-  
-    return this.databaseService.post.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        data: data
-      }
-
-    });
-  }
 }
