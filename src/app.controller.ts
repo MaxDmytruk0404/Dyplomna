@@ -55,7 +55,7 @@ export class AppController {
     @Query('type') type: string,
     @Query('data') data: any
   ) {
-    return this.appService.getRes(name, type, data);
+    return this.appService.sendRes(name, type, data);
   }
   
 }
