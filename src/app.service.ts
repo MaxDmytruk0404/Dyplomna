@@ -26,12 +26,11 @@ export class AppService {
       },
     });
 
-    if(user == null) {
-      return false
+    if (user == null) {
+      return false;
     } else {
-       return !!user;
+      return !!user;
     }
-
   }
 
   // Отриумю дані з БД по БС
@@ -57,7 +56,7 @@ export class AppService {
   }
 
   // Отриумю дані з усіх тестувань
-  async getRes(name: string, type: string) {
+  async getRes(name: string, type: string, data?: any) {
     const user = await this.databaseService.post.findFirst({
       where: {
         name: name,
@@ -67,4 +66,24 @@ export class AppService {
     return user?.data;
   }
 
+  // Оновлення даних з усіх тестувань
+  async sendRes(name: string, type: string, data: any) {
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        name: name,
+        type: type,
+      },
+    });
+
+    if (user) {
+      return this.databaseService.post.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          data: data
+        }
+      });
+    }
+  }
 }

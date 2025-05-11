@@ -44,5 +44,14 @@ export class AppController {
   ) {
     return this.appService.getRes(name, type);
   }
+
+  @Get('send-Res')
+  async sendRes(
+    @Query('name') name: string,
+    @Query('type') type: string,
+    @Query('data') data: any
+  ) {
+    return this.appService.getRes(name, type, data);
+  }
   
 }
