@@ -11,6 +11,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  // Перевірка на вхід
   @Get('check-credentials')
   async checkCredentials(
     @Query('name') name: string,
@@ -20,6 +21,7 @@ export class AppController {
     return this.appService.checkCredentials(name, password, type);
   }
 
+  // Отримання БС
    @Get('get-BS')
   async getBS(
     @Query('name') name: string,
@@ -28,7 +30,7 @@ export class AppController {
     return this.appService.getBSInfo(name, type);
   }
 
-
+  // Отримання ОВ
    @Get('get-OW')
   async getOW(
     @Query('name') name: string,
@@ -37,6 +39,7 @@ export class AppController {
     return this.appService.getOWInfo(name, type);
   }
 
+  // Отримання усіх результатів тестування 
   @Get('get-Res')
   async getRes(
     @Query('name') name: string,
@@ -45,13 +48,13 @@ export class AppController {
     return this.appService.getRes(name, type);
   }
 
-  @Get('send-Res')
+  // Оновлення інформації по всіх результатах тестування 
+  @Post('send-Res')
   async sendRes(
     @Query('name') name: string,
     @Query('type') type: string,
     @Query('data') data: any
   ) {
-    console.log(name)
     return this.appService.getRes(name, type, data);
   }
   
