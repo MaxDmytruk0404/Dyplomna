@@ -74,7 +74,7 @@ export class AppService {
         type: type,
       },
     });
-
+    console.log(user)
     if (user) {
       return this.databaseService.post.update({
         where: {
