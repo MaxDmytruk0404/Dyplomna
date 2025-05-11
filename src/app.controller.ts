@@ -51,11 +51,9 @@ export class AppController {
   // Оновлення інформації по всіх результатах тестування 
   @Post('send-Res')
   async sendRes(
-    @Query('name') name: string,
-    @Query('type') type: string,
-    @Query('data') data: object[]
-  ) {
-    return this.appService.sendRes(name, type, data);
+  @Body() params: { name: string, type: string, data: object[] }  // Отримуємо тіло запиту
+) {
+    return this.appService.sendRes(params.name, params.type, params.data);
   }
   
 }
