@@ -51,6 +51,7 @@ export class AppController {
     @Query('type') type: string,
     @Query('data') data: any
   ) {
+    console.log(name)
     return this.appService.getRes(name, type, data);
   }
   
