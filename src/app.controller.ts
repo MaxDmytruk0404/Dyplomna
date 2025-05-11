@@ -36,5 +36,13 @@ export class AppController {
   ) {
     return this.appService.getOWInfo(name, type);
   }
+
+  @Get('get-Res')
+  async getRes(
+    @Query('name') name: string,
+    @Query('type') type: string,
+  ) {
+    return this.appService.getRes(name, type);
+  }
   
 }

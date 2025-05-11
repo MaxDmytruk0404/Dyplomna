@@ -18,7 +18,7 @@ export class AppService {
     if (!name || !password) {
       return false;
     }
-
+    console.log('test')
     const user = await this.databaseService.post.findFirst({
       where: {
         name,
@@ -51,4 +51,16 @@ export class AppService {
     });
     return user?.data;
   }
+
+  // Отриумю дані з усіх тестувань
+  async getRes(name: string, type: string) {
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        name: name,
+        type: type,
+      },
+    });
+    return user?.data;
+  }
+
 }
