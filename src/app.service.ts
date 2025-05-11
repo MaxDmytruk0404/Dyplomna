@@ -68,6 +68,7 @@ export class AppService {
 
   // Оновлення даних з усіх тестувань
   async sendRes(name: string, type: string, data: any) {
+    console.log(data)
     const user = await this.databaseService.post.findFirst({
       where: {
         name: name,
