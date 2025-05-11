@@ -53,7 +53,7 @@ export class AppController {
   async sendRes(
     @Query('name') name: string,
     @Query('type') type: string,
-    @Query('data') data: any
+    @Query('data') data: object[]
   ) {
     return this.appService.sendRes(name, type, data);
   }
