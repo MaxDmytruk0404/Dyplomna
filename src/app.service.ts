@@ -3,7 +3,6 @@ import { DatabaseService } from './database/database.service';
 
 @Injectable()
 export class AppService {
-
   constructor(private readonly databaseService: DatabaseService) {}
 
   getHello(): string {
@@ -11,15 +10,24 @@ export class AppService {
   }
 
   // Перевірки чи є користувач в БД
-  async checkCredentials(name: string, password: string, type: string): Promise<boolean> {
+  async checkCredentials(
+    name: string,
+    password: string,
+    type: string,
+  ): Promise<boolean> {
+    if (!name || !password) {
+      return false;
+    }
+
     const user = await this.databaseService.post.findFirst({
       where: {
-        name: name,
-        password: password,
-        type: type,
+        name,
+        password,
+        type,
       },
     });
-    return !!user; // Повертає true, якщо користувач знайдений
+
+    return !!user;
   }
 
   // Отриумю дані з БД по БС
@@ -30,7 +38,7 @@ export class AppService {
         type: type,
       },
     });
-    return user?.data; // Повертає true, якщо користувач знайдений
+    return user?.data;
   }
 
   // Отриумю дані з БД по ОВ
@@ -41,8 +49,6 @@ export class AppService {
         type: type,
       },
     });
-    return user?.data; // Повертає true, якщо користувач знайдений
+    return user?.data;
   }
-
-  
 }
