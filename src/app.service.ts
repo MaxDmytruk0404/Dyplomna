@@ -26,7 +26,12 @@ export class AppService {
       },
     });
 
-    return !!user;
+    if(user == null) {
+      return false
+    } else {
+       return !!user;
+    }
+
   }
 
   // Отриумю дані з БД по БС
