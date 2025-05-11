@@ -18,13 +18,11 @@ export class AppService {
     if (!name || !password) {
       return false;
     }
-    console.log(name);
-    console.log(password)
     const user = await this.databaseService.post.findFirst({
       where: {
-        name,
-        password,
-        type,
+        name: name,
+        password: password,
+        type: type,
       },
     });
 
