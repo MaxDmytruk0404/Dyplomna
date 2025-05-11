@@ -22,5 +22,27 @@ export class AppService {
     return !!user; // Повертає true, якщо користувач знайдений
   }
 
+  // Отриумю дані з БД по БС
+  async getBSInfo(name: string, type: string) {
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        name: name,
+        type: type,
+      },
+    });
+    return user?.data; // Повертає true, якщо користувач знайдений
+  }
+
+  // Отриумю дані з БД по ОВ
+  async getOWInfo(name: string, type: string) {
+    const user = await this.databaseService.post.findFirst({
+      where: {
+        name: name,
+        type: type,
+      },
+    });
+    return user?.data; // Повертає true, якщо користувач знайдений
+  }
+
   
 }
